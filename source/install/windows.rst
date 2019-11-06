@@ -482,3 +482,98 @@ Now you need to set the PREPROD environment, for this you need to:
 2. Delete content of folder **C:\\webserver\\lizmap\\preprod\\master\\temp\\lizmap\\www\\** ;
 3. Lauch admin web interface to configure preprod lizmap repositories: http://localhost/preprod/admin.php ;
 4. In Lizmap / Configuration Lizmap / Services : Change "Cache root directory" into **C:\\webserver\\cache\\preprod**.
+
+=======================================
+Installing Lizmap Web Client and QGIS Server LTR 3.4 on Windows 10
+=======================================
+
+For the installation of the latest stable version of QGIS Server LTR v3.4.x with the Lizmap Web Client on Windows 10, the following tools are required:
+
+QGIS Server Installation
+------------------------
+Install QGIS Server via the OSGeo4W package manager (the 64-bit version is recommended).
+
+https://trac.osgeo.org/osgeo4w/
+
+Perform the installation as **"advanced installation"** and select the following packages:
+
+.. code-block:: install
+
+   + Desktop
+      +---- qgis-ltr
+   + Libs
+      + --- fcgi
+   + Web
+      +---- qgis-ltr-server
+
+.. image:: https://i.imgur.com/aSALd9L.png
+    :width: 530px
+    :align: center
+    :height: 300px
+    :alt: alternate text
+
+Apache 2.x.x Server, php 7.x.xx and Lizmap Configuration
+------------------------
+As OSGeo4w x64 does not offer Apache Web server packages, the PHP software is outdated to the Lizmap required. It is recommended to do the installation of https://docs.lizmap.com/current/en/install/windows.html.
+
+This configuration process is facilitated through the following file:
+
+http://bit.ly/qgis-server-lizmap (Apache + PHP + Lizmap download link)
+
+The process of installing the Apache, PHP and Lizmap web server is summarized as:
+
+1. Extract the file in **C:\\**, the following folder structure should remain:
+
+.. code-block:: install
+
+   + C:\webserver
+   +-- Apache24 (Map server)
+   +-- Data     (Project repository)
+   +-- lizmap   (Web Map Client)
+   +-- php-7.3.5
+   +-- Temp     (Cache storage)
+
+2. Open a Windows command console as an administrator. Navigate to the path **C:\\\webserver\\\Apache24\\\bin**. Install Apache as a service:
+
+.. code-block:: install
+
+   httpd.exe -k install
+
+.. image:: https://i.imgur.com/R1qMS2B.jpg
+    :width: 400px
+    :align: center
+    :height: 100px
+    :alt: alternate text
+
+Accept the installation and allow access to private and public networks.
+
+3. Start the map server with the following command:
+
+.. code-block:: install
+
+   httpd.exe -k start
+
+For the deployment of the map server and Lizmap use the following web links:
+
+**QGIS Server:**
+
+http://localhost/qgis/qgis_mapserv.fcgi.exe?Service=WMS&Request=GetCapabilities
+
+**Lizmap projets:**
+
+http://localhost/
+
+**Lizmap administration interface:**
+
+http://localhost/admin.php
+
+The username and password for admin corresponds to :kbd:`admin/admin`
+
+Lizmap Web interface preview
+
+.. image:: https://i.imgur.com/b8mxPh6.jpg
+    :width: 530px
+    :align: center
+    :height: 250px
+    :alt: alternate text
+
